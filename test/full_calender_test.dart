@@ -1,6 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:full_calender/full_calender.dart';
-import 'package:full_calender/full_calender_extension.dart';
 
 void main() {
   test('sunDateToJuliusDate', () {
@@ -22,7 +21,6 @@ void main() {
   test('leap1', () {
     final fCalendar = FullCalender(date: DateTime(2020, 5, 1));
     expect(fCalendar.lunarDate.toString(), '9/4/2020');
-    // expect(_convertSolarDateToLunarDate(1,5,2020,7.0), [9, 4, 2020, false]);
   });
   test('leap2', () {
     final fCalendar = FullCalender(date: DateTime(2020, 5, 31));
