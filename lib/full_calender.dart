@@ -10,7 +10,7 @@ library full_calender;
 
 import 'dart:math';
 
-import 'package:full_calender/lunar_date_time.dart';
+import 'package:full_calender/models/lunar_date_time.dart';
 
 class FullCalender {
   late DateTime date;
