@@ -1,4 +1,5 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:full_calender/enums/language_name.dart';
 import 'package:full_calender/full_calender.dart';
 
 void main() {
@@ -25,5 +26,23 @@ void main() {
   test('leap2', () {
     final fCalendar = FullCalender(date: DateTime(2020, 5, 31));
     expect(fCalendar.lunarDate.toString(), '9/leap 4/2020');
+  });
+
+  test('nameOfYear1', () {
+    final fCalendar = FullCalender(date: DateTime(2000, 12, 12));
+    expect(fCalendar.lunarDate.stemBranchOfYear.name(LanguageName.vietNam),
+        'Canh Thìn');
+  });
+
+  test('nameOfYear2', () {
+    final fCalendar = FullCalender(date: DateTime(2008, 02, 15));
+    expect(fCalendar.lunarDate.stemBranchOfYear.name(LanguageName.vietNam),
+        'Mậu Tý');
+  });
+
+  test('nameOfYear3', () {
+    final fCalendar = FullCalender(date: DateTime(2001, 10, 11));
+    expect(fCalendar.lunarDate.stemBranchOfYear.name(LanguageName.vietNam),
+        'Tân Tỵ');
   });
 }

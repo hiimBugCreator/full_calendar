@@ -1,30 +1,8 @@
+import 'package:full_calender/enums/branch.dart';
+import 'package:full_calender/enums/stem.dart';
+import 'package:full_calender/models/stem_branch.dart';
+
 class LunarDateTime {
-  final canList = [
-    "Canh",
-    "Tân",
-    "Nhâm",
-    "Quý",
-    "Giáp",
-    "Ất",
-    "Bính",
-    "Đinh",
-    "Mậu",
-    "Kỉ"
-  ];
-  final chiList = [
-    "Thân",
-    "Dậu",
-    "Tuất",
-    "Hợi",
-    "Tý",
-    "Sửu",
-    "Dần",
-    "Mẹo",
-    "Thìn",
-    "Tị",
-    "Ngọ",
-    "Mùi"
-  ];
   final _chiForMonthList = [
     "Dần",
     "Mẹo",
@@ -114,6 +92,8 @@ class LunarDateTime {
       required this.month,
       required this.day,
       this.isLeap = false});
+
+  StemBranch get stemBranchOfYear => StemBranch.fromYear(year);
 
   @override
   String toString() {
