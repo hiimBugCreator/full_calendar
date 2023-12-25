@@ -1,5 +1,3 @@
-import 'package:full_calender/enums/branch.dart';
-import 'package:full_calender/enums/stem.dart';
 import 'package:full_calender/models/stem_branch.dart';
 
 class LunarDateTime {
@@ -93,7 +91,9 @@ class LunarDateTime {
       required this.day,
       this.isLeap = false});
 
-  StemBranch get stemBranchOfYear => StemBranch.fromYear(year);
+  StemBranch get stemBranchOfYear => StemBranch.year(year);
+
+  StemBranch get stemBranchOfMonth => StemBranch.month(month, year);
 
   @override
   String toString() {

@@ -1,31 +1,57 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:full_calender/enums/language_name.dart';
 import 'package:full_calender/full_calender.dart';
+import 'package:full_calender/models/stem_branch.dart';
+import 'package:full_calender/test_code/lscon.dart';
 
 void main() {
-  test('sunDateToJuliusDate', () {
-    final fCalendar = FullCalender(date: DateTime(2000, 1, 1));
-    expect(fCalendar.juliusDate, 2451545);
-  });
-  test('sunDateToLunarDate', () {
-    final fCalendar = FullCalender(date: DateTime(1997, 12, 29));
-    expect(fCalendar.lunarDate.toString(), '1/12/1997');
-  });
   test('sunDateToLunarDate2', () {
+    final fCalendar = FullCalender(date: DateTime(1998, 1, 27));
+    expect(fCalendar.lunarDate.toString(), '2/11/1997');
+  });
+  test('sunDateToLunarDate2x', () {
+    Solar solar = Solar(solarYear: 1998, solarMonth: 1, solarDay: 27);
+    Lunar lunar = LunarSolarConverter.solarToLunar(solar);
+    expect(lunar.toString(), '2/11/1997');
+  });
+  test('sunDateToLunarDate3', () {
+    final fCalendar = FullCalender(date: DateTime(2023, 12, 25));
+    expect(fCalendar.lunarDate.toString(), '13/11/2023');
+  });
+  test('sunDateToLunarDate4', () {
     final fCalendar = FullCalender(date: DateTime(2000, 12, 12));
     expect(fCalendar.lunarDate.toString(), '17/11/2000');
   });
-  test('sunDateToLunarDate3', () {
+  test('sunDateToLunarDate5', () {
     final fCalendar = FullCalender(date: DateTime(1977, 1, 5));
     expect(fCalendar.lunarDate.toString(), '16/11/1976');
   });
-  test('leap1', () {
+  test('sunDateToLunarDate6', () {
+    final fCalendar = FullCalender(date: DateTime(2023, 2, 20));
+    expect(fCalendar.lunarDate.toString(), '1/2/2023');
+  });
+  test('sunDateToLunarDate7', () {
+    final fCalendar = FullCalender(date: DateTime(2023, 3, 21));
+    expect(fCalendar.lunarDate.toString(), '30/2/2023');
+  });
+  test('sunDateToLunarDate8', () {
+    final fCalendar = FullCalender(date: DateTime(2023, 3, 22));
+    expect(fCalendar.lunarDate.toString(), '1/leap 2/2023');
+  });test('sunDateToLunarDate9', () {
     final fCalendar = FullCalender(date: DateTime(2020, 5, 1));
     expect(fCalendar.lunarDate.toString(), '9/4/2020');
   });
-  test('leap2', () {
+  test('sunDateToLunarDate10', () {
     final fCalendar = FullCalender(date: DateTime(2020, 5, 31));
     expect(fCalendar.lunarDate.toString(), '9/leap 4/2020');
+  });
+  test('sunDateToLunarDate11', () {
+    final fCalendar = FullCalender(date: DateTime(2023, 4, 19));
+    expect(fCalendar.lunarDate.toString(), '29/leap 2/2023');
+  });
+  test('sunDateToLunarDate11', () {
+    final fCalendar = FullCalender(date: DateTime(2023, 4, 20));
+    expect(fCalendar.lunarDate.toString(), '1/3/2023');
   });
 
   test('nameOfYear1', () {
@@ -45,4 +71,27 @@ void main() {
     expect(fCalendar.lunarDate.stemBranchOfYear.name(LanguageName.vietNam),
         'Tân Tỵ');
   });
+  test('nameOfYear4', () {
+    final fCalendar = FullCalender(date: DateTime(2023, 12, 25));
+    expect(fCalendar.lunarDate.stemBranchOfYear.name(LanguageName.vietNam),
+        'Quý Mão');
+  });
+
+  test('nameOfMonth1', () {
+    final stemBranch = StemBranch.month(1, 1984);
+    expect(stemBranch.name(LanguageName.vietNam),
+        'Bính Dần');
+  });
+
+  test('nameOfMonth2', () {
+    final stemBranch = StemBranch.month(1, 1989);
+    expect(stemBranch.name(LanguageName.vietNam),
+        'Bính Dần');
+  });
+
+  // test('nameOfMonth3', () {
+  //   final fCalendar = FullCalender(date: DateTime(2023, 12, 25));
+  //   expect(fCalendar.lunarDate.stemBranchOfMonth.name(LanguageName.vietNam),
+  //       'Giáp Tý');
+  // });
 }

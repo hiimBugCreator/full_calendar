@@ -8,7 +8,7 @@ class StemBranch {
 
   StemBranch({required this.stem, required this.branch});
 
-  factory StemBranch.fromYear(int year) {
+  factory StemBranch.year(int year) {
     final stemsYearOrdered = [
       Stem.yangMetal,
       Stem.yinMetal,
@@ -38,6 +38,43 @@ class StemBranch {
     return StemBranch(
         stem: stemsYearOrdered[year % 10],
         branch: branchesYearOrdered[year % 12]);
+  }
+
+  factory StemBranch.month(int month, int year) {
+    final stemsYearOrdered = [
+      Stem.yangMetal,
+      Stem.yinMetal,
+      Stem.yangWater,
+      Stem.yinWater,
+      Stem.yangWood,
+      Stem.yinWood,
+      Stem.yangFire,
+      Stem.yinFire,
+      Stem.yangEarth,
+      Stem.yinEarth,
+    ];
+    final stemsJanIndexOrdered = [8, 0, 2, 4, 6, 8, 0, 2, 4, 6];
+    final branchesMonthOrdered = [
+      Branch.tiger,
+      Branch.rabbit,
+      Branch.dragon,
+      Branch.snake,
+      Branch.horse,
+      Branch.goat,
+      Branch.monkey,
+      Branch.rooster,
+      Branch.dog,
+      Branch.pig,
+      Branch.rat,
+      Branch.ox,
+    ];
+    final stemYearIndex = year % 10;
+    var steamMonthIndex = stemsJanIndexOrdered[stemYearIndex] + month;
+    steamMonthIndex =
+        (steamMonthIndex > 9 ? steamMonthIndex % 9 : steamMonthIndex) - 1;
+    return StemBranch(
+        stem: stemsYearOrdered[steamMonthIndex],
+        branch: branchesMonthOrdered[month - 1]);
   }
 
   String name(LanguageName lang) {

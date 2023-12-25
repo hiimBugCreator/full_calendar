@@ -22,7 +22,7 @@ extension BranchName on Branch {
       Branch.rat => "Tý",
       Branch.ox => "Sửu",
       Branch.tiger => "Dần",
-      Branch.rabbit => "Mẹo",
+      Branch.rabbit => "Mão",
       Branch.dragon => "Thìn",
       Branch.snake => "Tỵ",
       Branch.horse => "Ngọ",
