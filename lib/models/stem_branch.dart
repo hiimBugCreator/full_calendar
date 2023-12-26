@@ -76,6 +76,38 @@ class StemBranch {
         branch: branchesMonthOrdered[month - 1]);
   }
 
+  factory StemBranch.day(int julianDay) {
+    final stemsOrdered = [
+      Stem.yangWood,
+      Stem.yinWood,
+      Stem.yangFire,
+      Stem.yinFire,
+      Stem.yangEarth,
+      Stem.yinEarth,
+      Stem.yangMetal,
+      Stem.yinMetal,
+      Stem.yangWater,
+      Stem.yinWater,
+    ];
+    final branchesOrdered = [
+      Branch.rat,
+      Branch.ox,
+      Branch.tiger,
+      Branch.rabbit,
+      Branch.dragon,
+      Branch.snake,
+      Branch.horse,
+      Branch.goat,
+      Branch.monkey,
+      Branch.rooster,
+      Branch.dog,
+      Branch.pig,
+    ];
+    return StemBranch(
+        stem: stemsOrdered[(julianDay + 9) % 10],
+        branch: branchesOrdered[(julianDay + 1) % 12]);
+  }
+
   String name(LanguageName lang) {
     return switch (lang) {
       LanguageName.basic => "${stem.baseName}${branch.baseName}",

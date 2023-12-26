@@ -94,6 +94,13 @@ void main() {
         'Quý Mão');
   });
 
+  test('nameOfYear5', () {
+    final fCalendar =
+        FullCalender(date: DateTime(1995, 12, 25), timeZone: testTimeZone);
+    expect(fCalendar.lunarDate.stemBranchOfYear.name(LanguageName.vietNam),
+        'Ất Hợi');
+  });
+
   test('nameOfMonth1', () {
     final stemBranch = StemBranch.month(1, 1984);
     expect(stemBranch.name(LanguageName.vietNam), 'Bính Dần');
@@ -109,5 +116,19 @@ void main() {
         FullCalender(date: DateTime(2023, 12, 25), timeZone: testTimeZone);
     expect(fCalendar.lunarDate.stemBranchOfMonth.name(LanguageName.vietNam),
         'Giáp Tý');
+  });
+
+  test('nameOfDay1', () {
+    final fCalendar =
+        FullCalender(date: DateTime(1995, 3, 1), timeZone: testTimeZone);
+    expect(fCalendar.lunarDate.stemBranchOfDay.name(LanguageName.vietNam),
+        'Tân Mão');
+  });
+
+  test('nameOfDay2', () {
+    final fCalendar =
+        FullCalender(date: DateTime(1995, 12, 25), timeZone: testTimeZone);
+    expect(fCalendar.lunarDate.stemBranchOfDay.name(LanguageName.vietNam),
+        'Tân Mão');
   });
 }

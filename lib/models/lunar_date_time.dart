@@ -1,3 +1,5 @@
+import 'package:full_calender/full_calender.dart';
+import 'package:full_calender/full_calender_extension.dart';
 import 'package:full_calender/models/stem_branch.dart';
 
 class LunarDateTime {
@@ -79,21 +81,22 @@ class LunarDateTime {
   final int year;
   final int month;
   final int day;
-
-  // final String nameOfDate;
-  // final String nameOfMonth;
-  // final String nameOfYear;
   final bool isLeap;
+  final int timeZone;
 
   LunarDateTime(
       {required this.year,
       required this.month,
       required this.day,
-      this.isLeap = false});
+      this.isLeap = false,
+      this.timeZone = 7});
 
   StemBranch get stemBranchOfYear => StemBranch.year(year);
 
   StemBranch get stemBranchOfMonth => StemBranch.month(month, year);
+
+  StemBranch get stemBranchOfDay =>
+      StemBranch.day(FullCalenderExtension.convertLunarDateToJulianDay(this));
 
   @override
   String toString() {

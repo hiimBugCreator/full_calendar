@@ -1,9 +1,11 @@
 import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/models/lunar_date_time.dart';
 
-extension FullCalenderExtension on FullCalender {
+class FullCalenderExtension {
+  static final _temp = FullCalender.now(7);
+
   /// Convert a Julian day number to day/month/year. Parameter jd is an integer.
-  DateTime convertJulianDayToSolarDate(int jd) {
+  static DateTime convertJulianDayToSolarDate(int jd) {
     int a, b, c, d, e, m, day, month, year;
     if (jd > 2299160) {
       a = jd + 32044;
@@ -23,7 +25,7 @@ extension FullCalenderExtension on FullCalender {
   }
 
   /// Convert lunar date to the corresponding solar date.
-  DateTime? convertLunarDateToSolarDate(
+  static DateTime? convertLunarDateToSolarDate(
     LunarDateTime lunarDateTime, [
     int timeZone = 7,
   ]) {
@@ -32,11 +34,11 @@ extension FullCalenderExtension on FullCalender {
     const int daysInYear = 365;
     int k, a11, b11, off, leapOff, leapMonth, monthStart;
     if (lunarDateTime.month < 11) {
-      a11 = getLunarMonth11(lunarDateTime.year - 1, timeZone);
-      b11 = getLunarMonth11(lunarDateTime.year, timeZone);
+      a11 = _temp.getLunarMonth11(lunarDateTime.year - 1, timeZone);
+      b11 = _temp.getLunarMonth11(lunarDateTime.year, timeZone);
     } else {
-      a11 = getLunarMonth11(lunarDateTime.year, timeZone);
-      b11 = getLunarMonth11(lunarDateTime.year + 1, timeZone);
+      a11 = _temp.getLunarMonth11(lunarDateTime.year, timeZone);
+      b11 = _temp.getLunarMonth11(lunarDateTime.year + 1, timeZone);
     }
     k = (0.5 + (a11 - juliusDaysIn1900) / newMoonCycle).floor();
     off = lunarDateTime.month - 11;
@@ -44,7 +46,7 @@ extension FullCalenderExtension on FullCalender {
       off += 12;
     }
     if (b11 - a11 > daysInYear) {
-      leapOff = getLeapMonthOffset(a11, timeZone);
+      leapOff = _temp.getLeapMonthOffset(a11, timeZone);
       leapMonth = leapOff - 2;
       if (leapMonth < 0) {
         leapMonth += 12;
@@ -55,7 +57,19 @@ extension FullCalenderExtension on FullCalender {
         off += 1;
       }
     }
-    monthStart = getNewMoonDay(k + off, timeZone);
+    monthStart = _temp.getNewMoonDay(k + off, timeZone);
     return convertJulianDayToSolarDate(monthStart + lunarDateTime.day - 1);
+  }
+
+  /// Convert lunar date to the julian day.
+  static int convertLunarDateToJulianDay(
+    LunarDateTime lunarDateTime, [
+    int timeZone = 7,
+  ]) {
+    return FullCalender(
+            date: convertLunarDateToSolarDate(lunarDateTime, timeZone) ??
+                DateTime.now(),
+            timeZone: timeZone)
+        .julianDay;
   }
 }
