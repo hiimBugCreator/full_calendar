@@ -69,9 +69,8 @@ class StemBranch {
       Branch.ox,
     ];
     final stemYearIndex = year % 10;
-    var steamMonthIndex = stemsJanIndexOrdered[stemYearIndex] + month;
-    steamMonthIndex =
-        (steamMonthIndex > 9 ? steamMonthIndex % 9 : steamMonthIndex) - 1;
+    var steamMonthIndex =
+        (stemsJanIndexOrdered[stemYearIndex] + month - 1) % 10;
     return StemBranch(
         stem: stemsYearOrdered[steamMonthIndex],
         branch: branchesMonthOrdered[month - 1]);
