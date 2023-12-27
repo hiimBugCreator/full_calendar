@@ -44,7 +44,7 @@ class FullCalender {
   /// Compute the Julian day number of day dd/mm/yyyy, i.e., the number
   /// of days between 1/1/4713 BC (Julian calendar) and dd/mm/yyyy.
   /// Formula from http://www.tondering.dk/claus/calendar.html
-  int _solarDateToJulianDay(int dd, int mm, int yy) {
+  int _solarDateToJulianDay(int yy, int mm, int dd) {
     int a, y, m, jd;
     a = ((14 - mm) / 12).floor();
     y = yy + 4800 - a;
@@ -158,7 +158,7 @@ class FullCalender {
   int getLunarMonth11(int yy, [int? tz]) {
     int k, nm, sunLong;
     double off;
-    off = _solarDateToJulianDay(31, 12, yy) - 2415021;
+    off = _solarDateToJulianDay(yy, 12, 31) - 2415021;
     k = (off / _newMoonCycle).floor();
     nm = getNewMoonDay(k, tz ?? timeZone);
     sunLong = _getSunLongitude(nm);
@@ -191,7 +191,7 @@ class FullCalender {
   ) {
     int k, dayNumber, monthStart, a11, b11, lunarDay, lunarMonth, lunarYear;
     bool lunarLeap;
-    dayNumber = _solarDateToJulianDay(dd, mm, yy);
+    dayNumber = _solarDateToJulianDay(yy, mm, dd);
     k = (dayNumber - _juliusDaysIn1900) ~/ _newMoonCycle;
     monthStart = getNewMoonDay(k + 1, timeZone);
     if (monthStart > dayNumber) {
