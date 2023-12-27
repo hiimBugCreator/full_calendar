@@ -230,57 +230,12 @@ class FullCalender {
   }
 }
 
-// getCanChiYear(int year) {
-//   var can = canList[year % 10];
-//   var chi = chiList[year % 12];
-//   return '${can} ${chi}';
-// }
-//
-// getCanChiMonth(int month, int year) {
-//   var chi = chiForMonthList[month - 1];
-//   var indexCan = 0;
-//   var can = canList[year % 10];
-//
-//   if (can == "Giáp" || can == "Kỉ") {
-//     indexCan = 6;
-//   }
-//   if (can == "Ất" || can == "Canh") {
-//     indexCan = 8;
-//   }
-//   if (can == "Bính" || can == "Tân") {
-//     indexCan = 0;
-//   }
-//   if (can == "Đinh" || can == "Nhâm") {
-//     indexCan = 2;
-//   }
-//   if (can == "Mậu" || can == "Quý") {
-//     indexCan = 4;
-//   }
-//   return '${canList[(indexCan + month - 1) % 10]} ${chi}';
-// }
-//
-// // getDayName(lunarDate) {
-// //  if (lunarDate.day == 0) {
-// //    return "";
-// //  }
-// //  var cc = getCanChi(lunarDate);
-// //  var s = "Ngày " + cc[0] +", tháng "+cc[1] + ", năm " + cc[2];
-// //  return s;
-// //}
-//
-// getYearCanChi(year) {
-//   return canOrderedList[(year + 6) % 10] + " " + chiOrderedList[(year + 8) % 12];
-// }
-//
+
 // getCanHour(jdn) {
 //   return canOrderedList[(jdn - 1) * 2 % 10];
 // }
 //
-// getCanDay(jdn) {
-//   var dayName, monthName, yearName;
-//   dayName = canOrderedList[(jdn + 9) % 10] + " " + chiOrderedList[(jdn + 1) % 12];
-//   return dayName;
-// }
+
 //
 // jdn(dd, mm, yy) {
 //   var a = int((14 - mm) / 12);

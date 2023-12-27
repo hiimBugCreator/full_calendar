@@ -150,4 +150,58 @@ void main() {
     expect(fCalendar.lunarDate.stemBranchOfDay.name(LanguageName.vietNam),
         'Quý Tỵ');
   });
+
+  test('listHours1', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2023, 11, 10), timeZone: testTimeZone);
+    expect(
+        fCalendar.lunarDate.listStemBranchOfHour[0].name(LanguageName.vietNam),
+        'Canh Tý');
+  });
+  test('listHours2', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2023, 11, 10), timeZone: testTimeZone);
+    expect(
+        fCalendar.lunarDate.listStemBranchOfHour[2].name(LanguageName.vietNam),
+        'Nhâm Dần');
+  });
+  test('listHours3', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2023, 11, 10), timeZone: testTimeZone);
+    expect(
+        fCalendar.lunarDate.listStemBranchOfHour[11].name(LanguageName.vietNam),
+        'Tân Hợi');
+  });
+  test('listHours4', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2023, 11, 21), timeZone: testTimeZone);
+    expect(
+        fCalendar.lunarDate.listStemBranchOfHour[0].name(LanguageName.vietNam),
+        'Nhâm Tý');
+  });
+  test('listHours5', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2023, 11, 21), timeZone: testTimeZone);
+    expect(
+        fCalendar.lunarDate.listStemBranchOfHour[11].name(LanguageName.vietNam),
+        'Quý Hợi');
+  });
+  test('listLucky', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2023, 11, 20), timeZone: testTimeZone);
+    expect(fCalendar.lunarDate.listLuckyHours, [
+      true,
+      true,
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      true,
+      true,
+      false,
+      false
+    ]);
+  });
 }

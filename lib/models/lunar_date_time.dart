@@ -1,4 +1,17 @@
-import 'package:full_calender/full_calender.dart';
+/*
+ * Product by Louis Vu.
+ *
+ * This class provide the lunar date with some detail properties like Stem-Branch(Can-Chi/ganzhi).
+ * Current allowed systems are: Vietnamese, Chinese, Japanese and Korean.
+ *
+ * All functions were developed by Louis Vu, and refer to the calculations at these links:
+ * https://vi.wikipedia.org/wiki/Can_Chi
+ *
+ * Permission to use, copy, modify, and redistribute this software and its
+ * documentation for personal, non-commercial use is hereby granted provided that
+ * this copyright notice and appropriate documentation appears in all copies.
+ */
+
 import 'package:full_calender/full_calender_extension.dart';
 import 'package:full_calender/models/stem_branch.dart';
 
@@ -69,14 +82,6 @@ class LunarDateTime {
     'Vũ thủy',
     'Kinh trập'
   ];
-  final _gioHoangDao = [
-    '110100101100',
-    '001101001011',
-    '110011010010',
-    '101100110100',
-    '001011001101',
-    '010010110011'
-  ];
 
   final int year;
   final int month;
@@ -97,6 +102,49 @@ class LunarDateTime {
 
   StemBranch get stemBranchOfDay =>
       StemBranch.day(FullCalenderExtension.convertLunarDateToJulianDay(this));
+
+  List<StemBranch> get listStemBranchOfHour {
+    List<StemBranch> listHours = List.generate(
+        12,
+        (index) => StemBranch.hour(
+            FullCalenderExtension.convertLunarDateToJulianDay(this), index));
+    return listHours;
+  }
+
+  List<bool> get listLuckyHours {
+    var jd = FullCalenderExtension.convertLunarDateToJulianDay(this);
+    var num = (jd + 1) % 12;
+    final louisSequence = _convertToLouisSequence(num);
+    var isLucky = (num == 0 ||
+        num == 2 ||
+        num == 3 ||
+        num == 6 ||
+        num == 7 ||
+        num == 9);
+    var index = 0;
+    List<bool> listLucky = [];
+    for (var i in louisSequence) {
+      var temp = louisSequence[i];
+      while (temp > 0) {
+        listLucky[index] = isLucky;
+        temp--;
+        index++;
+      }
+      isLucky = !isLucky;
+    }
+    print("XXXXXXXX $listLucky");
+    return listLucky;
+  }
+
+  List<int> _convertToLouisSequence(int index) {
+    var base = [2, 1, 1, 2, 1, 1, 2, 2];
+    index %= 6;
+    while (index > 0) {
+      base.insert(0, base.removeLast());
+      index--;
+    }
+    return base;
+  }
 
   @override
   String toString() {

@@ -1,3 +1,17 @@
+/*
+ * Product by Louis Vu.
+ *
+ * This class provide 天干地支 for year, month, day, hour following the lunar date.
+ * Current allowed systems are: Vietnamese, Chinese, Japanese and Korean.
+ *
+ * All functions were developed by Louis Vu, and refer to the calculations at these links:
+ * https://vi.wikipedia.org/wiki/Can_Chi
+ *
+ * Permission to use, copy, modify, and redistribute this software and its
+ * documentation for personal, non-commercial use is hereby granted provided that
+ * this copyright notice and appropriate documentation appears in all copies.
+ */
+
 import 'package:full_calender/enums/branch.dart';
 import 'package:full_calender/enums/language_name.dart';
 import 'package:full_calender/enums/stem.dart';
@@ -106,6 +120,38 @@ class StemBranch {
     return StemBranch(
         stem: stemsOrdered[(julianDay + 9) % 10],
         branch: branchesOrdered[(julianDay + 1) % 12]);
+  }
+
+  factory StemBranch.hour(int julianDay, int index) {
+    final stemsOrdered = [
+      Stem.yangWood,
+      Stem.yinWood,
+      Stem.yangFire,
+      Stem.yinFire,
+      Stem.yangEarth,
+      Stem.yinEarth,
+      Stem.yangMetal,
+      Stem.yinMetal,
+      Stem.yangWater,
+      Stem.yinWater,
+    ];
+    final branchesOrdered = [
+      Branch.rat,
+      Branch.ox,
+      Branch.tiger,
+      Branch.rabbit,
+      Branch.dragon,
+      Branch.snake,
+      Branch.horse,
+      Branch.goat,
+      Branch.monkey,
+      Branch.rooster,
+      Branch.dog,
+      Branch.pig,
+    ];
+    return StemBranch(
+        stem: stemsOrdered[((julianDay - 1) * 2 + index) % 10],
+        branch: branchesOrdered[index]);
   }
 
   String name(LanguageName lang) {

@@ -169,4 +169,23 @@ extension BranchName on Branch {
       Branch.pig => "亥",
     };
   }
+
+  List<int> get hourRange {
+    return switch (this) {
+      Branch.rat => [23, 1],
+      Branch.ox => [1, 3],
+      Branch.tiger => [3, 5],
+      Branch.rabbit => [5, 7],
+      Branch.dragon => [7, 9],
+      Branch.snake => [9, 11],
+      Branch.horse => [11, 13],
+      Branch.goat => [13, 15],
+      Branch.monkey => [15, 17],
+      Branch.rooster => [17, 19],
+      Branch.dog => [19, 21],
+      Branch.pig => [21, 23],
+    };
+  }
+
+
 }
