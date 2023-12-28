@@ -1,5 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
 import 'package:full_calender/enums/language_name.dart';
+import 'package:full_calender/enums/solar_term.dart';
 import 'package:full_calender/enums/time_zone.dart';
 import 'package:full_calender/full_calender.dart';
 import 'package:full_calender/full_calender_extension.dart';
@@ -236,5 +237,11 @@ void main() {
     final fCalendar =
         FullCalender(date: DateTime(2000, 12, 12), timeZone: testTimeZone);
     expect(fCalendar.lunarDate.isLuckyDay, false);
+  });
+
+  test('solarTerm1', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2000, 12, 12), timeZone: testTimeZone);
+    expect(fCalendar.solarTerm.vietnameseName, "Đại Tuyết");
   });
 }

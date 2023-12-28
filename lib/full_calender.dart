@@ -19,6 +19,7 @@ library full_calender;
 
 import 'dart:math';
 
+import 'package:full_calender/enums/solar_term.dart';
 import 'package:full_calender/models/lunar_date_time.dart';
 
 class FullCalender {
@@ -37,6 +38,8 @@ class FullCalender {
   FullCalender({required this.date, required this.timeZone});
 
   int get julianDay => _solarDateToJulianDay(date.year, date.month, date.day);
+
+  SolarTerm get solarTerm => _getSolarTerm(julianDay);
 
   LunarDateTime get lunarDate =>
       _convertSolarDateToLunarDate(date.year, date.month, date.day);
@@ -147,6 +150,14 @@ class FullCalender {
     return (_calculateTheSunLongitude(dayNumber - 0.5 - timeZone / 24) / pi * 6)
         .floor();
   }
+  int _getSunLongitude2(int dayNumber) {
+    return (_calculateTheSunLongitude(dayNumber - 0.5 - timeZone / 24) / pi * 12)
+        .floor();
+  }
+
+  SolarTerm _getSolarTerm(jd) {
+    return SolarTerm.values[(_getSunLongitude2(jd + 1) + 3) % 24];
+  }
 
   /// Compute the day of the k-th new moon in the given time zone.
   /// The time zone if the time difference between local time and UTC: 7.0 for UTC+7:00.
@@ -229,7 +240,6 @@ class FullCalender {
         year: lunarYear, month: lunarMonth, day: lunarDay, isLeap: lunarLeap);
   }
 }
-
 
 // getCanHour(jdn) {
 //   return canOrderedList[(jdn - 1) * 2 % 10];

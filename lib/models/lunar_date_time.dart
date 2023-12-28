@@ -7,45 +7,17 @@
  * All functions were developed by Louis Vu, and refer to the calculations at these links:
  * https://vi.wikipedia.org/wiki/Can_Chi
  *
+ *
  * Permission to use, copy, modify, and redistribute this software and its
  * documentation for personal, non-commercial use is hereby granted provided that
  * this copyright notice and appropriate documentation appears in all copies.
  */
-
-import 'dart:io';
 
 import 'package:full_calender/enums/branch.dart';
 import 'package:full_calender/full_calender_extension.dart';
 import 'package:full_calender/models/stem_branch.dart';
 
 class LunarDateTime {
-  final _tietKhiList = [
-    'Xuân phân',
-    'Thanh minh',
-    'Cốc vũ',
-    'Lập hạ',
-    'Tiểu mãn',
-    'Mang chủng',
-    'Hạ chí',
-    'Tiểu thử',
-    'Đại thử',
-    'Lập thu',
-    'Xử thử',
-    'Bạch lộ',
-    'Thu phân',
-    'Hàn lộ',
-    'Sương giáng',
-    'Lập đông',
-    'Tiểu tuyết',
-    'Đại tuyết',
-    'Đông chí',
-    'Tiểu hàn',
-    'Đại hàn',
-    'Lập xuân',
-    'Vũ thủy',
-    'Kinh trập'
-  ];
-
   final int year;
   final int month;
   final int day;
