@@ -186,7 +186,7 @@ void main() {
         fCalendar.lunarDate.listStemBranchOfHour[11].name(LanguageName.vietNam),
         'Quý Hợi');
   });
-  test('listLucky', () {
+  test('listLuckyHour1', () {
     final fCalendar =
         FullCalender(date: DateTime(2023, 11, 20), timeZone: testTimeZone);
     expect(fCalendar.lunarDate.listLuckyHours, [
@@ -203,5 +203,38 @@ void main() {
       false,
       false
     ]);
+  });
+  test('listLuckyHour2', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2020, 12, 28), timeZone: testTimeZone);
+    expect(fCalendar.lunarDate.listLuckyHours, [
+      false,
+      true,
+      false,
+      false,
+      true,
+      false,
+      true,
+      true,
+      false,
+      false,
+      true,
+      true
+    ]);
+  });
+  test('luckyDay1', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2023, 12, 28), timeZone: testTimeZone);
+    expect(fCalendar.lunarDate.isLuckyDay, true);
+  });
+  test('luckyDay2', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2020, 12, 28), timeZone: testTimeZone);
+    expect(fCalendar.lunarDate.isLuckyDay, false);
+  });
+  test('luckyDay3', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2000, 12, 12), timeZone: testTimeZone);
+    expect(fCalendar.lunarDate.isLuckyDay, false);
   });
 }
