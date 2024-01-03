@@ -146,17 +146,18 @@ class FullCalender {
   /// The function returns a number between 0 and 11.
   /// From the day after March equinox and the 1st major term after March equinox, 0 is returned.
   /// After that, return 1, 2, 3 ...
-  int _getSunLongitude(int dayNumber) {
-    return (_calculateTheSunLongitude(dayNumber - 0.5 - timeZone / 24) / pi * 6)
-        .floor();
+  double _getSunLongitude(int dayNumber) {
+    return (_calculateTheSunLongitude(dayNumber - 0.5 - timeZone / 24) /
+        pi *
+        6);
   }
-  int _getSunLongitude2(int dayNumber) {
-    return (_calculateTheSunLongitude(dayNumber - 0.5 - timeZone / 24) / pi * 12)
-        .floor();
+
+  int _getSunLongitudeFloored(int dayNumber) {
+    return _getSunLongitude(dayNumber).floor();
   }
 
   SolarTerm _getSolarTerm(jd) {
-    return SolarTerm.values[(_getSunLongitude2(jd + 1) + 3) % 24];
+    return SolarTerm.values[((_getSunLongitude(jd + 1) * 2).floor() + 3) % 24];
   }
 
   /// Compute the day of the k-th new moon in the given time zone.
@@ -172,7 +173,7 @@ class FullCalender {
     off = _solarDateToJulianDay(yy, 12, 31) - 2415021;
     k = (off / _newMoonCycle).floor();
     nm = getNewMoonDay(k, tz ?? timeZone);
-    sunLong = _getSunLongitude(nm);
+    sunLong = _getSunLongitudeFloored(nm);
     if (sunLong >= 9) {
       nm = getNewMoonDay(k - 1, tz ?? timeZone);
     }
@@ -185,11 +186,11 @@ class FullCalender {
     k = ((a11 - _juliusDaysIn1900) / _newMoonCycle + 0.5).floor();
     last = 0;
     i = 1; // We start with the month following lunar month 11
-    arc = _getSunLongitude(getNewMoonDay(k + i, tz ?? timeZone));
+    arc = _getSunLongitudeFloored(getNewMoonDay(k + i, tz ?? timeZone));
     do {
       last = arc;
       i++;
-      arc = _getSunLongitude(getNewMoonDay(k + i, tz ?? timeZone));
+      arc = _getSunLongitudeFloored(getNewMoonDay(k + i, tz ?? timeZone));
     } while (arc != last && i < 14);
     return i - 1;
   }
@@ -240,48 +241,3 @@ class FullCalender {
         year: lunarYear, month: lunarMonth, day: lunarDay, isLeap: lunarLeap);
   }
 }
-
-// getCanHour(jdn) {
-//   return canOrderedList[(jdn - 1) * 2 % 10];
-// }
-//
-
-//
-// jdn(dd, mm, yy) {
-//   var a = int((14 - mm) / 12);
-//   var y = yy + 4800 - a;
-//   var m = mm + 12 * a - 3;
-//   var jd = dd +
-//       int((153 * m + 2) / 5) +
-//       365 * y +
-//       int(y / 4) -
-//       int(y / 100) +
-//       int(y / 400) -
-//       32045;
-//   return jd;
-// }
-//
-// getGioHoangDao(jd) {
-//   var chiOfDay = (jd + 1) % 12;
-//   var gioHD = gioHoangDao[chiOfDay %
-//       6]; // same values for Ty' (1) and Ngo. (6), for Suu and Mui etc.
-//   var ret = "";
-//   var count = 0;
-//   for (var i = 0; i < 12; i++) {
-//     if (gioHD.substring(i, i + 1) == '1') {
-//       ret += chiOrderedList[i];
-//       ret += ' (${{(i * 2 + 23) % 24}}-${{(i * 2 + 1) % 24}})';
-//       if (count++ < 5) ret += ', ';
-//       if (count == 3) ret += '\n';
-//     }
-//   }
-//   return ret;
-// }
-//
-// getTietKhi(jd) {
-//   return tietKhiList[getSunLongitude(jd + 1, 7.0)];
-// }
-//
-// getBeginHour(jdn) {
-//   return canOrderedList[(jdn - 1) * 2 % 10] + ' ' + chiOrderedList[0];
-// }

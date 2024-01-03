@@ -1,6 +1,23 @@
 /*
-* Following the knowledge on wiki site: https://en.wikipedia.org/wiki/
-*/
+ * Product by Louis Vu.
+ *
+ * This class provide the branch - which is also called (地支) or (十二支).
+ * These are twelve words referring to the 12 animals of the Eastern zodiac
+ * used to indicate direction, four seasons, day, month, year
+ * and hour in the past (equal two hours in modern times).
+ *
+ * Current allowed systems are: Vietnamese, Chinese, Japanese and Korean.
+ *
+ * All functions were developed by Louis Vu
+ * Following the knowledge on wiki site: https://en.wikipedia.org/wiki/
+ *
+ * Permission to use, copy, modify, and redistribute this software and its
+ * documentation for personal, non-commercial use is hereby granted provided that
+ * this copyright notice and appropriate documentation appears in all copies.
+ */
+
+///This class provide the branch - which is also called (地支) or (十二支).
+///These are twelve words referring to the 12 animals of the Eastern zodiac
 enum Branch {
   rat,
   ox,
@@ -17,6 +34,7 @@ enum Branch {
 }
 
 extension BranchName on Branch {
+  ///Get name of this branch in Vietnamese.
   String get vietnameseName {
     return switch (this) {
       Branch.rat => "Tý",
@@ -34,6 +52,7 @@ extension BranchName on Branch {
     };
   }
 
+  ///Get name of this branch in Korean by Latin letters.
   String get koreanNameOnRomany {
     return switch (this) {
       Branch.rat => "ja",
@@ -51,23 +70,25 @@ extension BranchName on Branch {
     };
   }
 
+  ///Get name of this branch in Korean.
   String get koreanNameOnHangul {
     return switch (this) {
-      Branch.rat => "ja",
-      Branch.ox => "chuk",
-      Branch.tiger => "in",
-      Branch.rabbit => "myo",
-      Branch.dragon => "jin",
-      Branch.snake => "sa",
-      Branch.horse => "o",
-      Branch.goat => "mi",
-      Branch.monkey => "sin",
-      Branch.rooster => "yu",
-      Branch.dog => "sul",
-      Branch.pig => "hae",
+      Branch.rat => "자",
+      Branch.ox => "축",
+      Branch.tiger => "인",
+      Branch.rabbit => "묘",
+      Branch.dragon => "진",
+      Branch.snake => "사",
+      Branch.horse => "오",
+      Branch.goat => "미",
+      Branch.monkey => "신",
+      Branch.rooster => "유",
+      Branch.dog => "술",
+      Branch.pig => "해",
     };
   }
 
+  ///Get name of this branch in Japanese(Kunyomi) by Latin letters.
   String get japaneseKunNameOnRomany {
     return switch (this) {
       Branch.rat => "ne",
@@ -85,6 +106,7 @@ extension BranchName on Branch {
     };
   }
 
+  ///Get name of this branch in Japanese(Kunyomi).
   String get japaneseKunName {
     return switch (this) {
       Branch.rat => "ね",
@@ -102,6 +124,7 @@ extension BranchName on Branch {
     };
   }
 
+  ///Get name of this branch in Japanese(Onyomi) by Latin letters.
   String get japaneseOnNameOnRomany {
     return switch (this) {
       Branch.rat => "shi",
@@ -119,6 +142,7 @@ extension BranchName on Branch {
     };
   }
 
+  ///Get name of this branch in Japanese(Onyomi).
   String get japaneseOnName {
     return switch (this) {
       Branch.rat => "し",
@@ -136,6 +160,7 @@ extension BranchName on Branch {
     };
   }
 
+  ///Get name of this branch in Chinese by Latin letters.
   String get baseNameOnRomany {
     return switch (this) {
       Branch.rat => "zǐ",
@@ -153,6 +178,7 @@ extension BranchName on Branch {
     };
   }
 
+  ///Get name of this branch in Chinese by Latin letters.
   String get baseName {
     return switch (this) {
       Branch.rat => "子",
@@ -170,6 +196,7 @@ extension BranchName on Branch {
     };
   }
 
+  ///Get [[startedHour, endedHour]] of this branch.
   List<int> get hourRange {
     return switch (this) {
       Branch.rat => [23, 1],
@@ -186,6 +213,4 @@ extension BranchName on Branch {
       Branch.pig => [21, 23],
     };
   }
-
-
 }

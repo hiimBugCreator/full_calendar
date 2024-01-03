@@ -1,6 +1,21 @@
 /*
-* Following the knowledge on wiki site: https://en.wikipedia.org/wiki/
-*/
+ * Product by Louis Vu.
+ *
+ * This class provide the solar term - which are 24 special points
+ * in the Earth's orbit around the Sun, each point 15° apart.
+ *
+ * Current allowed systems are: Vietnamese, Chinese, Japanese and Korean.
+ *
+ * All functions were developed by Louis Vu
+ * Following the knowledge on wiki site: https://en.wikipedia.org/wiki/
+ *
+ * Permission to use, copy, modify, and redistribute this software and its
+ * documentation for personal, non-commercial use is hereby granted provided that
+ * this copyright notice and appropriate documentation appears in all copies.
+ */
+
+///This class provide the solar term - which are 24 special points
+///in the Earth's orbit around the Sun, each point 15° apart.
 enum SolarTerm {
   springCommences,
   rainWater,
@@ -29,6 +44,8 @@ enum SolarTerm {
 }
 
 extension SolarTermName on SolarTerm {
+
+  ///Get name of this solar term in Vietnamese
   String get vietnameseName {
     return switch (this) {
       SolarTerm.springCommences => "Lập Xuân",
@@ -58,6 +75,7 @@ extension SolarTermName on SolarTerm {
     };
   }
 
+  ///Get name of this solar term in korean by Hangul
   String get koreanNameOnHangul {
     return switch (this) {
       SolarTerm.springCommences => "입춘",
@@ -87,6 +105,7 @@ extension SolarTermName on SolarTerm {
     };
   }
 
+  ///Get name of this solar term in Korean by Latin letters.
   String get koreanNameOnRomany {
     return switch (this) {
       SolarTerm.springCommences => "ipchun",
@@ -116,6 +135,7 @@ extension SolarTermName on SolarTerm {
     };
   }
 
+  ///Get name of this solar term in Japanese.
   String get japaneseName {
     return switch (this) {
       SolarTerm.springCommences => "りっしゅん",
@@ -145,6 +165,7 @@ extension SolarTermName on SolarTerm {
     };
   }
 
+  ///Get name of this solar term in Japanese by Latin letters.
   String get japaneseNameOnRomany {
     return switch (this) {
       SolarTerm.springCommences => "risshun",
@@ -174,6 +195,7 @@ extension SolarTermName on SolarTerm {
     };
   }
 
+  ///Get name of this solar term in Chinese
   String get baseName {
     return switch (this) {
       SolarTerm.springCommences => "立春",
@@ -203,6 +225,7 @@ extension SolarTermName on SolarTerm {
     };
   }
 
+  ///Get name of this solar term in Chinese by Latin letters.
   String get baseNameOnRomany {
     return switch (this) {
       SolarTerm.springCommences => "lìchūn",

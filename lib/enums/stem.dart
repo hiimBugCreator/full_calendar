@@ -1,6 +1,19 @@
 /*
-* Following the knowledge on wiki site: https://en.wikipedia.org/wiki/
-*/
+ * Product by Louis Vu.
+ *
+ * This class provide the stem - which is also called (天干) or (十干).
+ *
+ * Current allowed systems are: Vietnamese, Chinese, Japanese and Korean.
+ *
+ * All functions were developed by Louis Vu
+ * Following the knowledge on wiki site: https://en.wikipedia.org/wiki/
+ *
+ * Permission to use, copy, modify, and redistribute this software and its
+ * documentation for personal, non-commercial use is hereby granted provided that
+ * this copyright notice and appropriate documentation appears in all copies.
+ */
+
+///This class provide the stem - which is also called (天干) or (十干).
 enum Stem {
   yangWood,
   yinWood,
@@ -15,6 +28,7 @@ enum Stem {
 }
 
 extension StemName on Stem {
+  ///Get name of this solar term in Vietnamese
   String get vietnameseName {
     return switch (this) {
       Stem.yangWood => "Giáp",
@@ -30,6 +44,7 @@ extension StemName on Stem {
     };
   }
 
+  ///Get name of this solar term in korean by Hangul
   String get koreanNameOnHangul {
     return switch (this) {
       Stem.yangWood => "갑",
@@ -45,6 +60,7 @@ extension StemName on Stem {
     };
   }
 
+  ///Get name of this solar term in Korean by Latin letters.
   String get koreanNameOnRomany {
     return switch (this) {
       Stem.yangWood => "gap",
@@ -60,6 +76,7 @@ extension StemName on Stem {
     };
   }
 
+  ///Get name of this branch in Japanese(Kunyomi) by Latin letters.
   String get japaneseKunNameOnRomany {
     return switch (this) {
       Stem.yangWood => "kinoe",
@@ -75,6 +92,7 @@ extension StemName on Stem {
     };
   }
 
+  ///Get name of this branch in Japanese(Kunyomi).
   String get japaneseKunName{
     return switch (this) {
       Stem.yangWood => "木の兄",
@@ -90,6 +108,7 @@ extension StemName on Stem {
     };
   }
 
+  ///Get name of this branch in Japanese(Onyomi) by Latin letters.
   String get japaneseOnNameOnRomany {
     return switch (this) {
       Stem.yangWood => "kō",
@@ -105,6 +124,7 @@ extension StemName on Stem {
     };
   }
 
+  ///Get name of this branch in Japanese(Onyomi).
   String get japaneseOnName{
     return switch (this) {
       Stem.yangWood => "こう",
@@ -120,6 +140,7 @@ extension StemName on Stem {
     };
   }
 
+  ///Get name of this branch in Chinese by Latin letters.
   String get baseName {
     return switch (this) {
       Stem.yangWood => "甲",
@@ -135,6 +156,7 @@ extension StemName on Stem {
     };
   }
 
+  ///Get name of this branch in Chinese by Latin letters.
   String get baseNameOnRomany{
     return switch (this) {
       Stem.yangWood => "jiǎ",

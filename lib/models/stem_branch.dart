@@ -15,13 +15,33 @@
 import 'package:full_calender/enums/branch.dart';
 import 'package:full_calender/enums/language_name.dart';
 import 'package:full_calender/enums/stem.dart';
+import 'package:full_calender/full_calender_extension.dart';
+import 'package:full_calender/models/lunar_date_time.dart';
 
+///
+/// Represents a combination of a Stem and a Branch
+/// (People combine a stem with a branch to form the official name of things that need to be named (day, hour, month, year, etc.)).
+///
+/// This class provides methods to create StemBranch instances based on the year, month, day of the [LunarDateTime].
+///
+/// Example usage:
+/// ```dart
+/// // Create a StemBranch for the year 2022
+/// StemBranch yearBranch = StemBranch.year(2022);
+/// print('Year Branch: ${yearBranch.name(LanguageName.vietnamese)}');
+///
+/// // Create a StemBranch for the month of December in the year 2000
+/// StemBranch monthBranch = StemBranch.month(12, 2000);
+/// print('Month Branch: ${monthBranch.name(LanguageName.vietnamese)}');
+/// ```
 class StemBranch {
   late Stem stem;
   late Branch branch;
 
+  /// Constructs a StemBranch with the provided Stem and Branch.
   StemBranch({required this.stem, required this.branch});
 
+  /// Creates a year's StemBranch instance based on the given this [year].
   factory StemBranch.year(int year) {
     final stemsYearOrdered = [
       Stem.yangMetal,
@@ -54,6 +74,7 @@ class StemBranch {
         branch: branchesYearOrdered[year % 12]);
   }
 
+  /// Creates a month's StemBranch instance based on the given this [month] and [year] of this [month].
   factory StemBranch.month(int month, int year) {
     final stemsYearOrdered = [
       Stem.yangMetal,
@@ -90,6 +111,7 @@ class StemBranch {
         branch: branchesMonthOrdered[month - 1]);
   }
 
+  /// Creates a StemBranch instance based on the given the Julian day: [julianDay].
   factory StemBranch.day(int julianDay) {
     final stemsOrdered = [
       Stem.yangWood,
@@ -122,7 +144,13 @@ class StemBranch {
         branch: branchesOrdered[(julianDay + 1) % 12]);
   }
 
-  factory StemBranch.hour(int julianDay, int index) {
+  /// Creates a StemBranch instance based on the given the instance of LunarDateTime [date].
+  factory StemBranch.dayFromLunar(LunarDateTime date) {
+    return StemBranch.day(FullCalenderExtension.convertLunarDateToJulianDay(date));
+  }
+
+  /// Creates a StemBranch instance based on the given LunarDateTime [date] and [index] in range [[0-11]].
+  factory StemBranch.hour(LunarDateTime date, int index) {
     final stemsOrdered = [
       Stem.yangWood,
       Stem.yinWood,
@@ -149,11 +177,13 @@ class StemBranch {
       Branch.dog,
       Branch.pig,
     ];
+    var julianDay = FullCalenderExtension.convertLunarDateToJulianDay(date);
     return StemBranch(
         stem: stemsOrdered[((julianDay - 1) * 2 + index) % 10],
         branch: branchesOrdered[index]);
   }
 
+  /// Generates the name of the StemBranch in the specified [lang].
   String name(LanguageName lang) {
     return switch (lang) {
       LanguageName.basic => "${stem.baseName}${branch.baseName}",

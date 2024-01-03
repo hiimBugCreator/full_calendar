@@ -244,4 +244,10 @@ void main() {
         FullCalender(date: DateTime(2000, 12, 12), timeZone: testTimeZone);
     expect(fCalendar.solarTerm.vietnameseName, "Đại Tuyết");
   });
+
+  test('solarTerm2', () {
+    final fCalendar =
+        FullCalender(date: DateTime(2024, 2, 10), timeZone: testTimeZone);
+    expect(fCalendar.solarTerm.vietnameseName, "Lập Xuân");
+  });
 }

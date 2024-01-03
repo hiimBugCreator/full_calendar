@@ -7,7 +7,6 @@
  * All functions were developed by Louis Vu, and refer to the calculations at these links:
  * https://vi.wikipedia.org/wiki/Can_Chi
  *
- *
  * Permission to use, copy, modify, and redistribute this software and its
  * documentation for personal, non-commercial use is hereby granted provided that
  * this copyright notice and appropriate documentation appears in all copies.
@@ -17,6 +16,21 @@ import 'package:full_calender/enums/branch.dart';
 import 'package:full_calender/full_calender_extension.dart';
 import 'package:full_calender/models/stem_branch.dart';
 
+/// Represents a date and time in the Lunar calendar.
+///
+/// This class provides methods to work with Lunar dates, such as obtaining the Stem-Branch combination
+/// for the year, month, day, and hours, checking lucky hours, checking if it's a lucky day, and more.
+///
+/// Example usage:
+/// ```dart
+/// LunarDateTime lunarDate = LunarDateTime(year: 2000, month: 12, day: 12);
+/// print('Stem-Branch of the year: ${lunarDate.stemBranchOfYear.name(LanguageName.vietnamese)}');
+/// print('Stem-Branch of the month: ${lunarDate.stemBranchOfMonth.name(LanguageName.vietnamese)}');
+/// print('Stem-Branch of the day: ${lunarDate.stemBranchOfDay.name(LanguageName.vietnamese)}');
+/// print('Stem-Branch of "Mouse hour": ${lunarDate.listStemBranchOfHour[0].name(LanguageName.vietnamese)}');
+/// print('List of lucky hours: ${lunarDate.listLuckyHours}');
+/// print('Is it a lucky day? ${lunarDate.isLuckyDay}');
+/// ```
 class LunarDateTime {
   final int year;
   final int month;
@@ -24,6 +38,7 @@ class LunarDateTime {
   final bool isLeap;
   final int timeZone;
 
+  /// Constructs a LunarDateTime with the provided year, month, day, leap status, and timeZone.
   LunarDateTime(
       {required this.year,
       required this.month,
@@ -31,21 +46,24 @@ class LunarDateTime {
       this.isLeap = false,
       this.timeZone = 7});
 
+  /// Gets the Stem-Branch combination for the year.
   StemBranch get stemBranchOfYear => StemBranch.year(year);
 
+  /// Gets the Stem-Branch combination for the month.
   StemBranch get stemBranchOfMonth => StemBranch.month(month, year);
 
-  StemBranch get stemBranchOfDay =>
-      StemBranch.day(FullCalenderExtension.convertLunarDateToJulianDay(this));
+  /// Gets the Stem-Branch combination for the day.
+  StemBranch get stemBranchOfDay => StemBranch.dayFromLunar(this);
 
+  /// Generates a list of Stem-Branch combinations for each hour of this date.
+  /// This list has 12 elements equivalent to 12 branches from Mouse to Pig.
   List<StemBranch> get listStemBranchOfHour {
-    List<StemBranch> listHours = List.generate(
-        12,
-        (index) => StemBranch.hour(
-            FullCalenderExtension.convertLunarDateToJulianDay(this), index));
+    List<StemBranch> listHours =
+        List.generate(12, (index) => StemBranch.hour(this, index));
     return listHours;
   }
 
+  /// Generates a list of lucky hours of this date.
   List<bool> get listLuckyHours {
     var jd = FullCalenderExtension.convertLunarDateToJulianDay(this);
     var num = (jd + 1) % 12;

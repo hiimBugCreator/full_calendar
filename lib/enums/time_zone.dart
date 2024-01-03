@@ -1,3 +1,5 @@
+///This class provide the timezone
+///Use it quick [timezone] for quickly use as param on a few methods.
 enum TimeZone {
   vietnamese,
   chinese,
