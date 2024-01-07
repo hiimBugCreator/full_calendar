@@ -82,6 +82,7 @@ class LunarDateTime {
     return listLucky;
   }
 
+  /// Checks if the Lunar date is a lucky day.
   bool get isLuckyDay {
     var checkMonth = (month - 1) % 6;
     var branchOfDay = stemBranchOfDay.branch;
@@ -104,6 +105,7 @@ class LunarDateTime {
     return result;
   }
 
+  /// Helper method to generate an ordered list of Branches for checking lucky day.
   List<Branch> _orderedBranchToCheckLuckyDay(int index) {
     var base = [
       Branch.rat,
@@ -129,6 +131,7 @@ class LunarDateTime {
     return base;
   }
 
+  /// Helper method to convert an index to my sequence for checking lucky hours.
   List<int> _convertToLouisSequence(int index) {
     var base = [2, 1, 1, 2, 1, 1, 2, 2];
     index %= 6;

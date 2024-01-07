@@ -1,39 +1,73 @@
-<!--
-This README describes the package. If you publish this package to pub.dev,
-this README's contents appear on the landing page for your package.
+# Full Calendar Flutter Library
 
-For information about how to write a good package README, see the guide for
-[writing package pages](https://dart.dev/guides/libraries/writing-package-pages).
-
-For general information about developing packages, see the Dart guide for
-[creating packages](https://dart.dev/guides/libraries/create-library-packages)
-and the Flutter guide for
-[developing packages and plugins](https://flutter.dev/developing-packages).
--->
-
-TODO: Put a short description of the package here that helps potential users
-know whether this package might be useful for them.
+Welcome to the Full Calendar Library! This library provides a comprehensive set of tools for working
+with lunar dates, stems, branches, and more, making it easy to integrate traditional calendar
+features into your Flutter applications.
 
 ## Features
 
-TODO: List what your package can do. Maybe include images, gifs, or videos.
+- **Lunar Date Conversion:** Easily convert between solar and lunar dates.
+- **Number of Julian day Conversion:** Easily convert solar and lunar dates to number of Julian day.
+- **Stems and Branches:** Retrieve stems and branches for years, months, days, and hours.
+- **Multilingual Support:** Get names and representations in various languages.
+- **Lucky Day and Hour Detection:** Find out if a day or hour is considered lucky based on lunar
+  calendar principles.
 
-## Getting started
+## Getting Started
 
-TODO: List prerequisites and provide or point to information on how to
-start using the package.
+To use this library, add the following dependency to your `pubspec.yaml` file:
+
+```yaml
+dependencies:
+  full_calender: 
+```
+
+Then run:
+```shell
+$ flutter pub get
+```
+
+Import the library in your Dart code:
+```dart
+import 'package:full_calender/full_calender.dart';
+```
 
 ## Usage
 
-TODO: Include short and useful examples for package users. Add longer examples
-to `/example` folder.
-
+Lunar Date Conversion
 ```dart
-const like = 'sample';
+// Convert lunar date to solar date
+final lunarDate = LunarDateTime(year: 2023, month: 11, day: 10);
+final solarDate = FullCalenderExtension.convertLunarDateToSolarDate(lunarDate);
+print(solarDate); // Output: 2023-12-28
 ```
 
-## Additional information
+Stems and Branches
+```dart
+// Get stem and branch for a specific year
+final stemBranchOfYear = StemBranch.year(2023);
+print(stemBranchOfYear.name(LanguageName.vietNam)); // Output: Kỷ Hợi
+```
 
-TODO: Tell users more about the package: where to find more information, how to
-contribute to the package, how to file issues, what response they can expect
-from the package authors, and more.
+Lucky Day and Hour Detection
+```dart
+// Check if a specific day is considered lucky
+final luckyDay = FullCalender(date: DateTime(2023, 12, 28)).lunarDate.isLuckyDay;
+print(luckyDay); // Output: true
+
+// Get a list of lucky hours for a specific date
+final luckyHours = FullCalender(date: DateTime(2023, 11, 20)).lunarDate.listLuckyHours;
+print(luckyHours); // Output: [true, true,false,true,false,false,true,false,true,true,false,false]
+```
+
+Stems and Branches
+```dart
+// Get stem and branch for a specific year
+final stemBranchOfYear = StemBranch.year(2023);
+print(stemBranchOfYear.name(LanguageName.vietNam)); // Output: Kỷ Hợi
+```
+
+For more examples, check out the [example](https://github.com/hiimBugCreator/full_calendar/tree/main/example) directory.
+
+Issues and Feedback
+Please file issues or provide feedback on our [GitHub repository](https://github.com/hiimBugCreator/full_calendar/).
