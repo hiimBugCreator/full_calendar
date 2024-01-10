@@ -44,7 +44,6 @@ enum SolarTerm {
 }
 
 extension SolarTermName on SolarTerm {
-
   ///Get name of this solar term in Vietnamese
   String get vietnameseName {
     return switch (this) {

@@ -1,6 +1,6 @@
 name: full_calender
-description: The Full Calendar Flutter Library offers powerful astronomical algorithms sourced from Jean Meeus' book 'Astronomical Algorithms' (1998). This package facilitates seamless conversion between solar and lunar calendars, with a focus on the Vietnamese lunar calendar system. Developed by Louis Vu, the library supports additional lunar calendar systems, including Chinese, Japanese, and Korean. Explore detailed lunar date properties such as Stem-Branch (Can-Chi/ganzhi) representations. Unlock the richness of traditional calendar features with ease and precision.
-version: 1.0.0
+description: The Full Calendar Flutter Library facilitates seamless conversion between solar, lunar calendars and Julian days, with a focus on the Vietnamese lunar calendar system. Developed by Louis Vu
+version: 1.0.12
 homepage: https://github.com/hiimBugCreator/full_calendar/
 
 environment:
