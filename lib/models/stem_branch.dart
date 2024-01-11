@@ -146,7 +146,8 @@ class StemBranch {
 
   /// Creates a StemBranch instance based on the given the instance of LunarDateTime [date].
   factory StemBranch.dayFromLunar(LunarDateTime date) {
-    return StemBranch.day(FullCalenderExtension.convertLunarDateToJulianDay(date));
+    return StemBranch.day(
+        FullCalenderExtension.convertLunarDateToJulianDay(date));
   }
 
   /// Creates a StemBranch instance based on the given LunarDateTime [date] and [index] in range [[0-11]].
