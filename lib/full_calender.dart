@@ -28,6 +28,7 @@ class FullCalender {
 
   final double _juliusDaysIn1900 = 2415021.076998695;
   final double _newMoonCycle = 29.530588853;
+
   /// This variable should be used for calculation on function.
   final int rangeDaysInYear = 365;
 
