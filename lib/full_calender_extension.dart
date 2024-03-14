@@ -72,4 +72,71 @@ class FullCalenderExtension {
             timeZone: timeZone)
         .julianDay;
   }
+
+  /// Calculate range from two date
+  static int? _rangeDate(dynamic fromDate, dynamic toDate) {
+    if ((fromDate is DateTime || fromDate is LunarDateTime) &&
+        (toDate is DateTime || toDate is LunarDateTime)) {
+      var numOfFDay = (fromDate is LunarDateTime)
+          ? convertLunarDateToJulianDay(fromDate)
+          : FullCalender(date: fromDate, timeZone: 7).julianDay;
+      var numOfTDay = (toDate is LunarDateTime)
+          ? convertLunarDateToJulianDay(toDate)
+          : FullCalender(date: toDate, timeZone: 7).julianDay;
+      return numOfTDay - numOfFDay;
+    } else {
+      return null;
+    }
+  }
+
+  /// Check if the param ```fromDate``` is before the param ```toDate```.
+  /// Both [fromDate] and [toDate] need be a object of ```DateTime``` or ```LunarDateTime```.
+  /// If passing another type the result will return ```null```.
+  static bool? checkIsDateBefore(
+      {required dynamic fromDate, required dynamic toDate}) {
+    var r = _rangeDate(fromDate, toDate);
+    return (r == null) ? null : (r > 0);
+  }
+
+  /// Get number of date from ```fromDate``` to ```toDate```.
+  /// Both [fromDate] and [toDate] need be a object of ```DateTime``` or ```LunarDateTime```.
+  /// If passing another type the result will return ```null```.
+  static int? rangeOf2Dates(
+      {required dynamic fromDate, required dynamic toDate}) {
+    return _rangeDate(fromDate, toDate)?.abs();
+  }
+
+  /// Calculate new date
+  static DateTime? _newDate(dynamic rootDate, int rangeDays) {
+    if ((rootDate is DateTime || rootDate is LunarDateTime)) {
+      var numOfDay = (rootDate is LunarDateTime)
+          ? convertLunarDateToJulianDay(rootDate)
+          : FullCalender(date: rootDate, timeZone: 7).julianDay;
+      numOfDay += rangeDays;
+      return convertJulianDayToSolarDate(numOfDay);
+    } else {
+      return null;
+    }
+  }
+
+  /// Get Solar Date after ```rangeDays``` from ```fromDate```.
+  /// The [fromDate] need be a object of ```DateTime``` or ```LunarDateTime```.
+  /// If passing another type the result will return ```null```.
+  /// You can pass the negative for date before.
+  static DateTime? getSolarDateNext(
+      {required dynamic fromDate, required int rangeDays}) {
+    return _newDate(fromDate, rangeDays);
+  }
+
+  /// Get Lunar Date after ```rangeDays``` from ```fromDate```.
+  /// The [fromDate] need be a object of ```DateTime``` or ```LunarDateTime```.
+  /// If passing another type the result will return ```null```.
+  /// You can pass the negative for date before.
+  static LunarDateTime? getLunarDateNext(
+      {required dynamic fromDate, required int rangeDays}) {
+    var sld = _newDate(fromDate, rangeDays);
+    return (sld == null)
+        ? null
+        : FullCalender(date: sld, timeZone: 7).lunarDate;
+  }
 }

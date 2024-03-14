@@ -105,6 +105,13 @@ class LunarDateTime {
     return result;
   }
 
+  /// Get the Lunar Date after ```rangeDays```
+  /// You can pass the negative for date before.
+  LunarDateTime getDateNext(int rangeDays) {
+    return FullCalenderExtension.getLunarDateNext(
+        fromDate: this, rangeDays: rangeDays)!;
+  }
+
   /// Helper method to generate an ordered list of Branches for checking lucky day.
   List<Branch> _orderedBranchToCheckLuckyDay(int index) {
     var base = [

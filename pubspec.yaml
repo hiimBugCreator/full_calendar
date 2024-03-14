@@ -1,6 +1,6 @@
 name: full_calender
 description: The Full Calendar Flutter Library facilitates seamless conversion between solar, lunar calendars and Julian days, with a focus on the Vietnamese lunar calendar system.
-version: 1.1.12
+version: 1.2.12
 homepage: https://github.com/hiimBugCreator/full_calendar/
 
 environment:

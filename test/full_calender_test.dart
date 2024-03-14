@@ -250,4 +250,38 @@ void main() {
         FullCalender(date: DateTime(2024, 2, 10), timeZone: testTimeZone);
     expect(fCalendar.solarTerm.vietnameseName, "Lập Xuân");
   });
+
+  test('countDate', () {
+    final rs = FullCalenderExtension.rangeOf2Dates(
+        fromDate: DateTime(2000, 12, 12),
+        toDate:
+            FullCalender(date: DateTime(2000, 12, 18), timeZone: 7).lunarDate);
+    expect(rs, 6);
+  });
+
+  test('countDateErr', () {
+    final rs = FullCalenderExtension.rangeOf2Dates(
+        fromDate: DateTime(2000, 12, 12), toDate: 'Invalid type');
+    expect(rs, null);
+  });
+
+  test('checkDateBefore', () {
+    final rs = FullCalenderExtension.checkIsDateBefore(
+        fromDate: DateTime(2000, 12, 12),
+        toDate:
+            FullCalender(date: DateTime(2000, 12, 18), timeZone: 7).lunarDate);
+    expect(rs, true);
+  });
+
+  test('testNextDate', () {
+    final rs = LunarDateTime(year: 2023, month: 2, day: 5).getDateNext(10);
+    expect(
+        rs.toString(), LunarDateTime(year: 2023, month: 2, day: 15).toString());
+  });
+
+  test('testBeforeDate', () {
+    final rs = FullCalenderExtension.getSolarDateNext(
+        fromDate: DateTime(2024, 12, 14), rangeDays: -2);
+    expect(rs.toString(), DateTime(2024, 12, 12).toString());
+  });
 }

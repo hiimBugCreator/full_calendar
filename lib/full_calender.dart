@@ -28,7 +28,8 @@ class FullCalender {
 
   final double _juliusDaysIn1900 = 2415021.076998695;
   final double _newMoonCycle = 29.530588853;
-  final int daysInYear = 365;
+  /// This variable should be used for calculation on function.
+  final int rangeDaysInYear = 365;
 
   FullCalender.now(int timezone) {
     date = DateTime.now();
@@ -54,7 +55,7 @@ class FullCalender {
     m = mm + 12 * a - 3;
     jd = dd +
         ((153 * m + 2) / 5).floor() +
-        daysInYear * y +
+        rangeDaysInYear * y +
         (y / 4).floor() -
         (y / 100).floor() +
         (y / 400).floor() -
@@ -62,7 +63,7 @@ class FullCalender {
     if (jd < 2299161) {
       jd = dd +
           ((153 * m + 2) / 5).floor() +
-          daysInYear * y +
+          rangeDaysInYear * y +
           (y / 4).floor() -
           32083;
     }
@@ -222,7 +223,7 @@ class FullCalender {
     int diff = (monthStart - a11) ~/ 29;
     lunarLeap = false;
     lunarMonth = diff + 11;
-    if (b11 - a11 > daysInYear) {
+    if (b11 - a11 > rangeDaysInYear) {
       int leapMonthDiff = getLeapMonthOffset(a11);
       if (diff >= leapMonthDiff) {
         lunarMonth = diff + 10;
