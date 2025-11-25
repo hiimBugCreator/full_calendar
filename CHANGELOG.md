@@ -8,3 +8,7 @@
   * Calculate range of two days
   * Check if the day before
   * Get next day or previous day
+
+## 1.2.86
+
+* Optimize boiled code.

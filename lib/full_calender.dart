@@ -158,7 +158,7 @@ class FullCalender {
     return _getSunLongitude(dayNumber).floor();
   }
 
-  SolarTerm _getSolarTerm(jd) {
+  SolarTerm _getSolarTerm(int jd) {
     return SolarTerm.values[((_getSunLongitude(jd + 1) * 2).floor() + 3) % 24];
   }
 
