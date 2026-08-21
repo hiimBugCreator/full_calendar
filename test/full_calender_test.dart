@@ -49,6 +49,38 @@ void main() {
         FullCalender(date: DateTime(2023, 2, 20), timeZone: testTimeZone);
     expect(fCalendar.lunarDate.toString(), '1/2/2023');
   });
+  // Before 1900 the new moon index is negative, so truncating towards zero
+  // instead of flooring used to give a day number that was off, and often
+  // negative.
+  test('solarDateToLunarDateBefore1900', () {
+    expect(
+        FullCalender(date: DateTime(1800, 1, 1), timeZone: testTimeZone)
+            .lunarDate
+            .toString(),
+        '7/12/1799');
+    expect(
+        FullCalender(date: DateTime(1850, 6, 15), timeZone: testTimeZone)
+            .lunarDate
+            .toString(),
+        '6/5/1850');
+    expect(
+        FullCalender(date: DateTime(1880, 2, 10), timeZone: testTimeZone)
+            .lunarDate
+            .toString(),
+        '1/1/1880');
+    expect(
+        FullCalender(date: DateTime(1899, 12, 31), timeZone: testTimeZone)
+            .lunarDate
+            .toString(),
+        '29/11/1899');
+  });
+  test('solarDateToLunarDateLeapMonthBefore1900', () {
+    expect(
+        FullCalender(date: DateTime(1860, 4, 21), timeZone: testTimeZone)
+            .lunarDate
+            .toString(),
+        '1/leap 3/1860');
+  });
   test('solarDateToLunarDate7', () {
     final fCalendar =
         FullCalender(date: DateTime(2023, 3, 21), timeZone: testTimeZone);
