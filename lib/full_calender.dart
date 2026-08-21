@@ -206,7 +206,9 @@ class FullCalender {
     int k, dayNumber, monthStart, a11, b11, lunarDay, lunarMonth, lunarYear;
     bool lunarLeap;
     dayNumber = _solarDateToJulianDay(yy, mm, dd);
-    k = (dayNumber - _juliusDaysIn1900) ~/ _newMoonCycle;
+    // Must floor, not truncate: `~/` rounds towards zero, so for dates before
+    // 1900 (where the dividend is negative) it would give a k one too large.
+    k = ((dayNumber - _juliusDaysIn1900) / _newMoonCycle).floor();
     monthStart = getNewMoonDay(k + 1, timeZone);
     if (monthStart > dayNumber) {
       monthStart = getNewMoonDay(k, timeZone);
